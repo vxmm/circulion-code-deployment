@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings</title>
+    <script>
+        async function fetchSignedUrl() {
+    try {
+        const response = await fetch("https://1xn3w13sqc.execute-api.us-east-1.amazonaws.com/prod/get-signed-url");
+        const data = await response.json();
+        
+        // Handle the nested structure where body is a JSON string
+        if (data.body && typeof data.body === 'string') {
+            const bodyContent = JSON.parse(data.body);
+            if (bodyContent.url) {
+                window.location.href = bodyContent.url;
+                return;
+            }
+        }
+        
+        // Fallback to direct structure
+        if (data.url) {
+            window.location.href = data.url;
+        } else {
+            console.error("Failed to get signed URL:", data);
+        }
+    } catch (error) {
+        console.error("Error fetching signed URL:", error);
+    }
+}
+    </script>
+</head>
+<body>
+    <h1>Greetings, {{ username }}</h1>
+    <button onclick="fetchSignedUrl()">View Available Recipes</button>
+</body>
+</html>
