@@ -1,7 +1,8 @@
 # About
 This is the code repository for the main assignment infrastructure components and is intended to serve as a future repository for the CI/CD pipeline for the project.
 
-The full prototype is explained and demonstrated in the .ppt presentation attached to my e-mail. 
+The prototype demo and documentation in the .ppt presentation attached to my e-mail. 
+
 For details on the infrastructure deployment project, see my [other repository](https://github.com/vxmm/circulion-infra-deployment).
 
 ## Overview of the entire infrastructure
