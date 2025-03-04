@@ -5,10 +5,10 @@ import boto3
 import rsa
 from botocore.exceptions import ClientError
 
-# Your CloudFront domain
+# TODO: add this to SSM Parameter Store 
 CLOUDFRONT_URL = "https://d20ii5cyt7sb3r.cloudfront.net/"
 
-# Your AWS public key ID (the one uploaded to CloudFront)
+# TODO: add this to SSM Parameter Store
 KEY_PAIR_ID = "KHPQZC3AZEI32"
 
 def get_secret(secret_name, region_name="us-east-1"):
@@ -46,14 +46,12 @@ def get_recipe_from_dynamodb(username, region_name="us-east-1"):
     except ClientError as e:
         raise e
 
-# Retrieve the recipe for the specified user
+# TODO: decode JWT for username
 username = "testuser"
 OBJECT_NAME = get_recipe_from_dynamodb(username)
 
 
-# OBJECT_NAME = "gus-practice_bundle.zip"
-
-# Expiration time for the signed URL (e.g., 1 hour from now)
+# Expiration time for the signed URL (5 hours from now)
 UTC_TIMEZONE = datetime.timezone.utc
 EXPIRE_TIME = int((datetime.datetime.now(UTC_TIMEZONE) + datetime.timedelta(hours=5)).timestamp())
 
@@ -74,9 +72,7 @@ policy_json = json.dumps(policy, separators=(",", ":"))
 policy_b64 = base64.b64encode(policy_json.encode()).decode()
 
 # Retrieve the private key from Secrets Manager
-private_key_pem = get_secret("cl-private-key-distribution")  # Replace with your secret name
-
-# Load the private key from the PEM string (assuming it's stored in PEM format)
+private_key_pem = get_secret("cl-private-key-distribution") 
 private_key = rsa.PrivateKey.load_pkcs1(private_key_pem.encode())
 
 # Sign the policy with the private key
