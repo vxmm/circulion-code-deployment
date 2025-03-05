@@ -5,7 +5,7 @@ The prototype demo and documentation in the .ppt presentation attached to my e-m
 
 For details on the infrastructure deployment project, see my [other repository](https://github.com/vxmm/circulion-infra-deployment).
 
-## Overview of the entire infrastructure
+## Infrastructure Overview
 
  ![cl-overview-assignment-final](https://github.com/user-attachments/assets/350a4f44-577f-4c24-8b46-8770a49be23f)
 
